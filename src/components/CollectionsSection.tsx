@@ -1,40 +1,7 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import stickerExpressions from '@/assets/sticker-expressions.png';
-import stickerSpiritual from '@/assets/sticker-spiritual.png';
-import stickerPhone from '@/assets/sticker-phone.png';
-import stickerBottle from '@/assets/sticker-bottle.png';
-
-const collections = [
-  {
-    title: 'Expression Stickers',
-    description: 'Fun character expressions for every mood',
-    image: stickerExpressions,
-    items: '25+ designs',
-    color: 'from-teal-light/20 to-primary/10',
-  },
-  {
-    title: 'Spiritual Collection',
-    description: 'Beautiful Krishna and devotional art',
-    image: stickerSpiritual,
-    items: '40+ designs',
-    color: 'from-gold/20 to-secondary/10',
-  },
-  {
-    title: 'Anime & Pop Culture',
-    description: 'Your favorite characters ready to stick',
-    image: stickerPhone,
-    items: '100+ designs',
-    color: 'from-primary/10 to-teal-light/20',
-  },
-  {
-    title: 'Custom Designs',
-    description: 'Create your own unique stickers',
-    image: stickerBottle,
-    items: 'Unlimited',
-    color: 'from-secondary/10 to-gold/20',
-  },
-];
+import { collections } from '@/data/products';
 
 const CollectionsSection = () => {
   return (
@@ -47,10 +14,12 @@ const CollectionsSection = () => {
               Find Your Perfect <span className="text-gradient-gold">Stickers</span>
             </h2>
           </div>
-          <Button variant="outline" className="self-start md:self-auto">
-            View All Collections
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link to="/collections">
+            <Button variant="outline" className="self-start md:self-auto">
+              View All Collections
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -80,10 +49,12 @@ const CollectionsSection = () => {
                   <p className="text-muted-foreground mb-6">
                     {collection.description}
                   </p>
-                  <Button variant="hero" size="default" className="self-start">
-                    Explore
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  <Link to={`/collections/${collection.id}`}>
+                    <Button variant="hero" size="default" className="self-start">
+                      Explore
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
