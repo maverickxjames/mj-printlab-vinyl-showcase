@@ -14,7 +14,7 @@ const CollectionsSection = () => {
               Find Your Perfect <span className="text-gradient-gold">Stickers</span>
             </h2>
           </div>
-          <Link to="/collections">
+          <Link to="/shop">
             <Button variant="outline" className="self-start md:self-auto">
               View All Collections
               <ArrowRight className="w-4 h-4" />
@@ -49,7 +49,7 @@ const CollectionsSection = () => {
                   <p className="text-muted-foreground mb-6">
                     {collection.description}
                   </p>
-                  <Link to={`/collections/${collection.id}`}>
+                  <Link to="/shop">
                     <Button variant="hero" size="default" className="self-start">
                       Explore
                       <ArrowRight className="w-4 h-4" />

@@ -1,13 +1,24 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingBag, Check, Truck, Shield, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getProductById, getCollectionById } from '@/data/products';
+import { useCart } from '@/contexts/CartContext';
 
 const ProductDetails = () => {
   const { productId } = useParams();
   const product = productId ? getProductById(productId) : undefined;
+  const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart(product);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 1500);
+  };
 
   if (!product) {
     return (
@@ -17,7 +28,7 @@ const ProductDetails = () => {
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-4xl font-bold text-foreground mb-4">Product Not Found</h1>
             <p className="text-muted-foreground mb-8">The product you're looking for doesn't exist.</p>
-            <Link to="/collections">
+            <Link to="/shop">
               <Button variant="hero">Browse Collections</Button>
             </Link>
           </div>
@@ -28,11 +39,6 @@ const ProductDetails = () => {
   }
 
   const collection = getCollectionById(product.category);
-
-  const handleBuyNow = () => {
-    // For now, show an alert. In production, this would integrate with payment
-    alert(`Thank you for your interest in "${product.name}"!\n\nPrice: ₹${product.price}\n\nPayment integration coming soon. Please contact us via WhatsApp to place your order.`);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -106,11 +112,20 @@ const ProductDetails = () => {
                 variant="hero"
                 size="xl"
                 className="w-full mb-6"
-                onClick={handleBuyNow}
+                onClick={handleAddToCart}
                 disabled={!product.inStock}
               >
-                <ShoppingBag className="w-5 h-5" />
-                {product.inStock ? 'Buy Now' : 'Out of Stock'}
+                {isAdded ? (
+                  <>
+                    <Check className="w-5 h-5" />
+                    Added to Cart!
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag className="w-5 h-5" />
+                    {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                  </>
+                )}
               </Button>
 
               {/* Trust Badges */}
