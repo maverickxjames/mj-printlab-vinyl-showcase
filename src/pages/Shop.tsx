@@ -100,7 +100,7 @@ const Shop = () => {
                     >
                       <div className="relative h-56 overflow-hidden">
                         <img
-                          src={product.images[0]}
+                          src={product.image}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
@@ -148,7 +148,7 @@ const Shop = () => {
                 <div className="grid lg:grid-cols-2 gap-12">
                   <div className="relative">
                     <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted shadow-card">
-                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                     </div>
                     {!product.inStock && (
                       <div className="absolute top-4 right-4 bg-destructive text-destructive-foreground px-4 py-2 rounded-full font-semibold">
